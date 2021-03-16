@@ -1,8 +1,10 @@
 # React Quiz code-a-long Example
 
-[Video Resource](https://www.youtube.com/watch?v=Lya-qYiDqIA)
+- [Video Source Example & Reference](https://www.youtube.com/watch?v=Lya-qYiDqIA)
 
-CSS and Starter code provided within Setup Folder
+- Starter code and CSS provided within `Setup` Folder.
+
+- Basic server that will direct all paths to `index.html`
 
 
 <!-- Boilerplate ReadMe Below -->
