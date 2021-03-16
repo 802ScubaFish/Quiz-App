@@ -1,32 +1,33 @@
 import React, { useState } from 'react';
 
 export default function App() {
+	// Array of question objects
 	const questions = [
 		{
-			questionText: 'What is the capital of France?',
+			questionText: 'What is the capital of Vermont?',
 			answerOptions: [
-				{ answerText: 'New York', isCorrect: false },
-				{ answerText: 'London', isCorrect: false },
-				{ answerText: 'Paris', isCorrect: true },
-				{ answerText: 'Dublin', isCorrect: false },
+				{ answerText: 'Burlington', isCorrect: false },
+				{ answerText: 'Milton', isCorrect: false },
+				{ answerText: 'Montpelier', isCorrect: true },
+				{ answerText: 'Essex', isCorrect: false },
 			],
 		},
 		{
-			questionText: 'Who is CEO of Tesla?',
+			questionText: 'Who is Darth Vader?',
 			answerOptions: [
-				{ answerText: 'Jeff Bezos', isCorrect: false },
-				{ answerText: 'Elon Musk', isCorrect: true },
-				{ answerText: 'Bill Gates', isCorrect: false },
-				{ answerText: 'Tony Stark', isCorrect: false },
+				{ answerText: 'Frank Oz', isCorrect: false },
+				{ answerText: 'Anakin Skywalker', isCorrect: true },
+				{ answerText: 'Pedro Pascal', isCorrect: false },
+				{ answerText: 'Your Father', isCorrect: false },
 			],
 		},
 		{
-			questionText: 'The iPhone was created by which company?',
+			questionText: 'Which Vehicle brand uses a 6 star constellation as its logo?',
 			answerOptions: [
-				{ answerText: 'Apple', isCorrect: true },
-				{ answerText: 'Intel', isCorrect: false },
-				{ answerText: 'Amazon', isCorrect: false },
-				{ answerText: 'Microsoft', isCorrect: false },
+				{ answerText: 'Subaru', isCorrect: true },
+				{ answerText: 'Audi', isCorrect: false },
+				{ answerText: 'Tesla', isCorrect: false },
+				{ answerText: 'Honda', isCorrect: false },
 			],
 		},
 		{
@@ -40,25 +41,57 @@ export default function App() {
 		},
 	];
 
+	// Track question and start with the first question in the array (0)
+	const [currentQuestion, setCurrentQuestion] = useState(0);
+	// Track score display state
+	const [showScore, setShowScore] = useState(false);
+	// Track score points value
+	const [score, setScore] = useState(0);
+
+	// Function to increment question each time a button is clicked
+	function handleAnswerBttnClick(isCorrect) {
+		// If chosen answer is correct or not..
+		if(isCorrect === true) {
+			setScore(score + 1)
+		}
+		// If reach the end of questions, then show score display.
+		const nextQuestion = currentQuestion + 1;
+		if(nextQuestion < questions.length) {
+			setCurrentQuestion(nextQuestion);
+		} else {
+			setShowScore(true)
+		}
+		
+	}
+
+	// Function to restart game & reset all state variables
+	function restartGameButton() {
+		setShowScore(false);
+		setScore(0);
+		setCurrentQuestion(0);
+	}
+
 	return (
 		<div className='app'>
-			{/* HINT: replace "false" with logic to display the 
-      score when the user has answered all the questions */}
-			{false ? (
-				<div className='score-section'>You scored 1 out of {questions.length}</div>
+			{/* Ternary to render If showScore is true, show the score div below, if false then show the questions section */}
+			{showScore ? (
+				<>
+				<div className='score-section'>You scored {score} out of {questions.length}</div>
+				<button onClick={restartGameButton}>Try Again?</button>
+				</>
 			) : (
 				<>
 					<div className='question-section'>
 						<div className='question-count'>
-							<span>Question 1</span>/{questions.length}
+							<span>Question {currentQuestion + 1}</span>/{questions.length}
 						</div>
-						<div className='question-text'>This is where the question text should go</div>
+						<div className='question-text'>{questions[currentQuestion].questionText}</div>
 					</div>
+					{/* Map over each questions answer options and make each option its own button*/}
 					<div className='answer-section'>
-						<button>Answer 1</button>
-						<button>Answer 2</button>
-						<button>Answer 3</button>
-						<button>Answer 4</button>
+						{questions[currentQuestion].answerOptions.map((answerOption) => (
+							<button onClick={() => handleAnswerBttnClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
+						))}
 					</div>
 				</>
 			)}

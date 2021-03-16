@@ -1,3 +1,13 @@
+# React Quiz code-a-long Example
+
+[Video Resource](https://www.youtube.com/watch?v=Lya-qYiDqIA)
+
+CSS and Starter code provided within Setup Folder
+
+
+<!-- Boilerplate ReadMe Below -->
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
