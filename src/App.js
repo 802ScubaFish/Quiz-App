@@ -53,7 +53,8 @@ export default function App() {
 		// If chosen answer is correct or not..
 		if(isCorrect === true) {
 			setScore(score + 1)
-		}
+		}// No else since we always want to run the rest of this block
+        
 		// If reach the end of questions, then show score display.
 		const nextQuestion = currentQuestion + 1;
 		if(nextQuestion < questions.length) {
